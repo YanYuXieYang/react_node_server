@@ -31,13 +31,13 @@ app.listen(4000, () => {
 
 // //查询数据库
 // var sql = '';
-// conn.query(sql, function (err, result) {
+// conn.query(sql, function (err, data) {
 //   if (err) {
 //     console.log('[SELECT ERROR] - ', err.message);
 //     return;
 //   }
 //   console.log('mysql query result:');
-//   console.log(result);
+//   console.log(data);
 // });
 
 // conn.end();
@@ -46,19 +46,18 @@ app.listen(4000, () => {
 //api请求接口
 app.post('/api/getDoubanActivity', (req, res) => {
   var sql = 'select * from ';
-  conn.query(sql, function (err, result) {
+  conn.query(sql, function (err, data) {
     if (err) {
       console.log('[SELECT ERROR] - ', err.message);
       return;
     }
     console.log('mysql query result:');
-    console.log(result);
-    // res.json({
-    //   result
-    // })
-    res.send({
-      code: 200, message: "get Douban Activity success", data: result
-    })
+    console.log(data);
+
+    var result = { code: 200, message: "get Douban Activity success", data: data };
+
+    res.send(result);
+    // return res.jsonp(result);
   });
   conn.end();
 })
